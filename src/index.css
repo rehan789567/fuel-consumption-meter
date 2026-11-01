@@ -3,22 +3,95 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #FFFFFF;
+    color: #09090B;
+    scroll-behavior: smooth;
+  }
+  ::selection {
+    background-color: #0047FF;
+    color: #FFFFFF;
   }
 }
 
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+.bg-swiss-grid {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, #F1F3F5 1px, transparent 1px),
+    linear-gradient(to bottom, #F1F3F5 1px, transparent 1px);
 }
-::-webkit-scrollbar-track {
-  background: transparent;
+
+/* KINETIC TYPOGRAPHY ANIMATIONS */
+@keyframes kinetic-text-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 0px rgba(0, 71, 255, 0));
+    letter-spacing: -0.04em;
+  }
+  50% {
+    filter: drop-shadow(0 0 12px rgba(0, 71, 255, 0.45));
+    letter-spacing: -0.03em;
+  }
 }
-::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 9999px;
+
+.kinetic-glow-pulse {
+  animation: kinetic-text-glow 4s ease-in-out infinite;
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.dark ::-webkit-scrollbar-thumb {
-  background: #334155;
+.kinetic-glow-pulse:hover {
+  transform: translateY(-2px) scale(1.01);
+}
+
+.kinetic-word-block {
+  display: inline-block;
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+.kinetic-word-block:hover {
+  transform: translateY(-2px);
+  color: #0047FF;
+}
+
+/* SEAMLESS CONTINUOUS MARQUEE ANIMATION */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-infinite {
+  display: flex;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+}
+
+.marquee-container:hover .animate-marquee-infinite {
+  animation-play-state: paused;
+}
+
+/* INTERACTIVE PROJECT CARDS HOVER */
+.project-card-interactive {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.project-card-interactive:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 30px -10px rgba(0, 71, 255, 0.15), 0 0 0 1px #0047FF;
+}
+
+/* 3D Wireframe Canvas interactive rotate */
+@keyframes rotate-slow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: rotate-slow 24s linear infinite;
+}
+
+.animate-spin-reverse {
+  animation: rotate-slow 16s linear infinite reverse;
 }
